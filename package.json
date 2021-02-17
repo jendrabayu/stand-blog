@@ -10,11 +10,15 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.2",
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
+        "i": "^0.3.6",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "moment": "^2.29.1",
+        "npm": "^7.5.4",
         "popper.js": "^1.12",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^2.3.1",
@@ -23,5 +27,8 @@
         "vue": "^2.5.17",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "sweetalert2": "^10.15.1"
     }
 }

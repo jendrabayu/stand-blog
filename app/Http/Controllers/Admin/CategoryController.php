@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'string', 'max:50']
+            'title' => ['required', 'string', 'max:50', 'min:3']
         ]);
 
         $category = Category::create([
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => ['required', 'string', 'max:50']
+            'title' => ['required', 'string', 'max:50', 'min:3']
         ]);
 
         $category = Category::findOrFail($id);

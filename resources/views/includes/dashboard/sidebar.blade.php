@@ -7,10 +7,12 @@
    </div>
    <ul class="sidebar-menu">
      <li class="menu-header">Dashboard</li>
-     <li class="active"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i
+     <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+       <a class="nav-link" href="{{ route('admin.dashboard') }}"><i
            class="fas fas fa-fire"></i><span>Dashboard</span></a>
      </li>
-     <li class=""><a class="nav-link" href="{{ route('admin.categories') }}"><i
+     <li class="{{ request()->routeIs('admin.categories') ? 'active' : '' }}">
+       <a class="nav-link" href="{{ route('admin.categories') }}"><i
            class="fas fas fa-fire"></i><span>Category</span></a>
      </li>
      <li class="nav-item dropdown">

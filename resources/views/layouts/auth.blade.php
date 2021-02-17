@@ -8,8 +8,8 @@
 
   <title>@yield('title', 'Login') &mdash; Stand Blog</title>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
   <link rel="stylesheet" href="{{ asset('assets/stisla/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/stisla/css/components.css') }}">
   @stack('styles')
@@ -25,7 +25,7 @@
 
   <script src="{{ asset('assets/stisla/js/app.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
   @stack('scripts')
 </body>
 

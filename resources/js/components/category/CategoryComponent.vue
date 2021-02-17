@@ -1,6 +1,21 @@
 <template>
   <div class="row mt-4">
     <div class="col-12">
+      <div v-if="errors.length > 0" class="alert alert-danger">
+        <div class="alert-body">
+          <button class="close" @click="errors = []">
+            <span>&times;</span>
+          </button>
+          <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
+          <br />
+          <ul>
+            <li v-for="(error, index) in errors" :key="index">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <h4>All Categories</h4>
@@ -178,12 +193,12 @@ export default {
   data() {
     return {
       categories: [],
+      errors: [],
+      success: "",
       createForm: {
-        errors: [],
         title: "",
       },
       editForm: {
-        errors: [],
         id: null,
         title: "",
       },
@@ -203,66 +218,88 @@ export default {
         .get("/admin/categories")
         .then((response) => {
           this.categories = response.data;
-          console.log(response.data);
         })
         .catch((error) => {
-          console.log(error.response);
+          this.showError(error);
         });
     },
     showCreateForm() {
+      this.errors = [];
       $("#modal-add-category").modal("show");
     },
     edit(category) {
+      this.errors = [];
       $("#modal-edit-category").modal("show");
       this.editForm.id = category.id;
       this.editForm.title = category.title;
     },
-    store() {
+    async store() {
       this.loading.store = true;
-      axios
+      await axios
         .post("/admin/category", { title: this.createForm.title })
         .then((response) => {
           this.categories.unshift(response.data);
-          this.loading.store = false;
-          $("#modal-add-category").modal("hide");
-          this.createForm.title = "";
         })
         .catch((error) => {
-          console.log(error.response);
-          this.loading.store = false;
-          $("#modal-add-category").modal("hide");
-          this.createForm.title = "";
+          this.showError(error);
         });
+      this.createForm.title = "";
+      this.loading.store = false;
+      $("#modal-add-category").modal("hide");
     },
-    update() {
+    async update() {
       this.loading.update = true;
-      axios
+      await axios
         .put(`/admin/category/${this.editForm.id}`, {
           title: this.editForm.title,
         })
         .then((response) => {
           const data = response.data;
-          this.loading.update = false;
-          $("#modal-edit-category").modal("hide");
           const index = this.categories.findIndex((cat) => cat.id === data.id);
           this.categories.splice(index, 1, data);
+          
         })
         .catch((error) => {
-          console.log(error.response);
-          this.loading.update = false;
-          $("#modal-edit-category").modal("hide");
+          this.showError(error);
         });
+      this.loading.update = false;
+      $("#modal-edit-category").modal("hide");
     },
     destroy(id) {
-      axios
-        .delete(`/admin/category/${id}`)
-        .then((response) => {
-          const index = this.categories.findIndex((cat) => cat.id === id);
-          this.categories.splice(index, 1);
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+      this.errors = [];
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You will also delete all posts related to this category",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`/admin/category/${id}`)
+            .then((response) => {
+              const index = this.categories.findIndex((cat) => cat.id === id);
+              this.categories.splice(index, 1);
+              Swal.fire(
+                "Deleted!",
+                "Your category has been deleted.",
+                "success"
+              );
+            })
+            .catch((error) => {
+              this.showError(error);
+            });
+        }
+      });
+    },
+    showError(error) {
+      if (typeof error.response.data === "object") {
+        this.errors = _.flatten(_.toArray(error.response.data.errors));
+      } else {
+        this.errors = ["Something went wrong. Please try again."];
+      }
     },
   },
   computed: {

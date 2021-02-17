@@ -5,6 +5,8 @@ require('./stisla/scripts')
 
 
 window.Vue = require('vue').default;
+window.moment = require('moment')
+window.Swal = require('sweetalert2')
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,3 +30,4 @@ Vue.component('category-component', require('./components/category/CategoryCompo
 const app = new Vue({
   el: '#app',
 });
+
