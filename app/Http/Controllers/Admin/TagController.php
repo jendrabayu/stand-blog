@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +17,13 @@ class CategoryController extends Controller
     public function index()
     {
 
-        return view('admin.category');
+        return view('admin.tag');
     }
 
-    public function getCategories()
+    public function getTags()
     {
-        $categories = Category::withCount('posts')->latest()->get();
-        return $categories;
+        $tag = Tag::withCount('posts')->latest()->get();
+        return $tag;
     }
 
     /**
@@ -35,15 +35,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'string', 'max:50', 'min:3', 'unique:categories']
+            'title' => ['required', 'string', 'max:50', 'min:3', 'unique:tags']
         ]);
 
-        $category = Category::create([
+        $tag = Tag::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
         ]);
 
-        return $category;
+        return $tag;
     }
 
     /**
@@ -55,17 +55,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $tag = Tag::findOrFail($id);
         $request->validate([
-            'title' => ['required', 'string', 'max:50', 'min:3', 'unique:categories,title,' . $category->id]
+            'title' => ['required', 'string', 'max:50', 'min:3', 'unique:tags,title,' . $tag->id]
         ]);
 
-        $category->update([
+        $tag->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
         ]);
 
-        return $category;
+        return $tag;
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        return $category->delete();
+        $tag = Tag::findOrFail($id);
+        return $tag->delete();
     }
 }

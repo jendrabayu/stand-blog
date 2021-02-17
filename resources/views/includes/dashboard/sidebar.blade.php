@@ -11,15 +11,18 @@
        <a class="nav-link" href="{{ route('admin.dashboard') }}"><i
            class="fas fas fa-fire"></i><span>Dashboard</span></a>
      </li>
-     <li class="{{ request()->routeIs('admin.categories') ? 'active' : '' }}">
-       <a class="nav-link" href="{{ route('admin.categories') }}"><i
+     <li class="{{ request()->routeIs('admin.category') ? 'active' : '' }}">
+       <a class="nav-link" href="{{ route('admin.category') }}"><i
            class="fas fas fa-fire"></i><span>Category</span></a>
      </li>
+     <li class="{{ request()->routeIs('admin.tag') ? 'active' : '' }}">
+       <a class="nav-link" href="{{ route('admin.tag') }}"><i class="fas fas fa-fire"></i><span>Tag</span></a>
+     </li>
      <li class="nav-item dropdown">
-       <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+       <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Post</span></a>
        <ul class="dropdown-menu">
-         <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-         <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+         <li><a class="nav-link" href="{{ route('admin.post.create') }}">Create</a></li>
+         <li><a class="nav-link" href="{{ route('admin.post.index') }}">List</a></li>
        </ul>
      </li>
    </ul>

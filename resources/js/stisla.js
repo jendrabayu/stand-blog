@@ -20,6 +20,7 @@ window.Swal = require('sweetalert2')
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('category-component', require('./components/category/CategoryComponent.vue').default);
+Vue.component('tag-component', require('./components/tag/TagComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
