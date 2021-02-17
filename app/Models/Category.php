@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(\App\Models\Post::class, 'category_id', 'id');
     }
+
+    public static function getLatestId()
+    {
+        return intval(self::orderByDesc('id')->first()->id ?? 0);
+    }
 }
