@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('content');
             $table->string('image');
+            $table->tinyInteger('status')->default(1)->comment('0 => PENDING, 1 => PUBLISH');
+            $table->bigInteger('views')->nullable();
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ window.Swal = require('sweetalert2')
 
 Vue.component('category-component', require('./components/category/CategoryComponent.vue').default);
 Vue.component('tag-component', require('./components/tag/TagComponent.vue').default);
+Vue.component('post-component', require('./components/post/PostComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

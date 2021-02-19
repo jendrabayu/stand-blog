@@ -12,6 +12,10 @@
   </section>
 
   <section class="section-body">
-
+    <div class="row">
+      <div class="col-12">
+        <post-component create-post-link="{{ route('admin.post.create') }}" />
+      </div>
+    </div>
   </section>
 @endsection

@@ -48,6 +48,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::delete('/tag/{id}', [AdminTagController::class, 'destroy']);
         Route::put('/tag/{id}', [AdminTagController::class, 'update']);
 
-        Route::resource('post', AdminPostController::class);
+        Route::resource('post', AdminPostController::class)->except('show');
+        Route::get('/posts', [AdminPostController::class, 'posts']);
     });
 });
